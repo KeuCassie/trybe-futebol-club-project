@@ -2,15 +2,15 @@ import * as bcrypt from 'bcryptjs';
 import HttpException from '../shared/HttpException';
 import IToken from '../interfaces/tokenInterface';
 import { IUser } from '../interfaces/userInterface';
-import User from '../database/models/User';
+import Users from '../database/models/User';
 import jwt from '../utils/jwt';
 
 const loginUser = async (user: Omit<IUser, 'role, username'>): Promise<IToken> => {
   const { email, password } = user;
 
-  const userLogin = await User.findOne({
+  const userLogin = await Users.findOne({
     attributes: ['id', 'username', 'role', 'email', 'password'],
-    where: { email, password },
+    where: { email },
   });
 
   if (!userLogin) throw new HttpException(401, 'Incorrect email or password');
