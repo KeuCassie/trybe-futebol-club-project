@@ -1,6 +1,6 @@
 import { JwtPayload, sign, SignOptions, verify } from 'jsonwebtoken';
 import HttpExceptions from '../shared/HttpException';
-import { IUser } from '../interfaces/userInterface';
+import IUser from '../interfaces/userInterface';
 
 const TOKEN_SECRET = process.env.JWT_SECRET || 'jwt_secret';
 

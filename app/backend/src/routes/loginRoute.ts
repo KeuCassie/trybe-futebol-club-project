@@ -5,6 +5,4 @@ const loginRoute = Router();
 
 loginRoute.post('/', controller.loginController);
 
-export default {
-  loginRoute,
-};
+export default loginRoute;

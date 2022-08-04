@@ -3,6 +3,6 @@ import loginRoute from './loginRoute';
 
 const routers: Router = Router();
 
-routers.use('/login', loginRoute.loginRoute);
+routers.use('/login', loginRoute);
 
 export default routers;

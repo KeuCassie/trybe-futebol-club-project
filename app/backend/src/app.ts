@@ -10,6 +10,8 @@ class App {
     this.app = express();
 
     this.config();
+    this.app.use(routers);
+    this.app.use(httpErrorMiddleware);
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
@@ -25,8 +27,6 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    this.app.use(routers);
-    this.app.use(httpErrorMiddleware);
   }
 
   public start(PORT: string | number):void {
