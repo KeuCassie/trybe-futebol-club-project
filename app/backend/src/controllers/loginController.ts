@@ -6,13 +6,13 @@ const loginController = async (req: Request, res: Response) : Promise<Response> 
   return res.status(200).json(token);
 };
 
-const roleUserController = async (_req: Request, res: Response): Promise<Response> => {
+/* const roleUserController = async (_req: Request, res: Response): Promise<Response> => {
   const role = await loginService.roleUserService(res.locals.payload);
   console.log('controller', role);
   return res.status(200).json(role);
-};
+}; */
 
 export default {
   loginController,
-  roleUserController,
+  // roleUserController,
 };
