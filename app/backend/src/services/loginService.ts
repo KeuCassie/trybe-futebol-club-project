@@ -10,7 +10,6 @@ const loginUser = async (user: Omit<IUser, 'role, username'>): Promise<IToken> =
   const { email, password } = user;
 
   const userLogin = await Users.findOne({ where: { email } });
-  console.log(userLogin);
 
   if (!userLogin) throw new HttpException(401, 'Incorrect email or password');
 
@@ -26,6 +25,14 @@ const loginUser = async (user: Omit<IUser, 'role, username'>): Promise<IToken> =
   return { token };
 };
 
+const roleUserService = async (token: IUser): Promise<object> => {
+  console.log('recebendo o token', token);
+  const { role } = token;
+  console.log('service', token);
+  return { role };
+};
+
 export default {
   loginUser,
+  roleUserService,
 };
