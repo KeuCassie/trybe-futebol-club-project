@@ -7,6 +7,15 @@ const getTeams = async (): Promise<object> => {
   return teams;
 };
 
+const getTeamById = async (id: string): Promise<object | null> => {
+  const team = await Teams.findOne({
+    attributes: ['id', 'teamName'],
+    where: { id },
+  });
+  return team;
+};
+
 export default {
   getTeams,
+  getTeamById,
 };
