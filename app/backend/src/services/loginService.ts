@@ -25,14 +25,12 @@ const loginUser = async (user: Omit<IUser, 'role, username'>): Promise<IToken> =
   return { token };
 };
 
-/* const roleUserService = async (token: IUser): Promise<object> => {
-  console.log('recebendo o token', token);
+const roleUserService = async (token: IUser): Promise<object> => {
   const { role } = token;
-  console.log('service', token);
   return { role };
-}; */
+};
 
 export default {
   loginUser,
-  // roleUserService,
+  roleUserService,
 };
