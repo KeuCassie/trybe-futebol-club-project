@@ -1,6 +1,7 @@
 import Teams from '../database/models/Team';
 import Matches from '../database/models/Match';
 import HttpException from '../shared/HttpException';
+import { IMatchesBody } from '../interfaces/matchesInterface';
 
 const getMatches = async (): Promise<object> => {
   const matches = await Matches.findAll({
@@ -12,7 +13,7 @@ const getMatches = async (): Promise<object> => {
   return matches;
 };
 
-const matchesInProgress = async (query: any): Promise<any> => {
+const matchesInProgress = async (query: boolean): Promise<object[]> => {
   const matches = await Matches.findAll({
     where: { inProgress: query },
     include: [
@@ -20,11 +21,11 @@ const matchesInProgress = async (query: any): Promise<any> => {
       { model: Teams, as: 'teamAway', attributes: ['teamName'] },
     ],
   });
-  console.log('service', matches);
+
   return matches;
 };
 
-const saveMatches = async (id: number, body: any): Promise<any> => {
+const saveMatches = async (id: number, body: IMatchesBody): Promise<object> => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = body;
 
   if (homeTeam === awayTeam) {
@@ -55,7 +56,7 @@ const updateMatches = async (id: number): Promise<object> => {
   return { message: 'Finished' };
 };
 
-const updateMacthesInProgress = async (id: number, body: any) => {
+const updateMacthesInProgress = async (id: number, body: IMatchesBody): Promise<object> => {
   const { homeTeamGoals, awayTeamGoals } = body;
   const matches = await Matches.findOne({ where: { id } });
   if (!matches) throw new HttpException(400, 'not found matches');

@@ -9,7 +9,6 @@ const getMatches = async (req: Request, res: Response): Promise<Response> => {
   }
 
   const number = Boolean(inProgress === 'true');
-  console.log('controller', number);
   const matches = await matchService.matchesInProgress(number);
   return res.status(200).json(matches);
 };
