@@ -6,5 +6,6 @@ const matchRoute = Router();
 
 matchRoute.get('/', controller.getMatches);
 matchRoute.post('/', authenticationMiddleware, controller.saveMatches);
+matchRoute.patch('/:id/finish', controller.updateMatches);
 
 export default matchRoute;

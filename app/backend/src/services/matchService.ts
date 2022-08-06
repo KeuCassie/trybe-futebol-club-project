@@ -46,8 +46,18 @@ const saveMatches = async (id: number, body: any): Promise<any> => {
   return createTeam;
 };
 
+const updateMatches = async (id: number): Promise<object> => {
+  const matches = await Matches.findOne({ where: { id } });
+  if (!matches) throw new HttpException(400, 'not found matches');
+
+  await Matches.update({ inProgress: false }, { where: { id } });
+
+  return { message: 'Finished' };
+};
+
 export default {
   getMatches,
   matchesInProgress,
   saveMatches,
+  updateMatches,
 };
