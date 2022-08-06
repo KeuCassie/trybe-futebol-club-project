@@ -26,8 +26,15 @@ const updateMatches = async (req: Request, res: Response): Promise<Response> => 
   return res.status(200).json(matches);
 };
 
+const updateMacthesInProgress = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params;
+  const matches = await matchService.updateMacthesInProgress(Number(id), req.body);
+  return res.status(200).json(matches);
+};
+
 export default {
   getMatches,
   saveMatches,
   updateMatches,
+  updateMacthesInProgress,
 };

@@ -55,9 +55,22 @@ const updateMatches = async (id: number): Promise<object> => {
   return { message: 'Finished' };
 };
 
+const updateMacthesInProgress = async (id: number, body: any) => {
+  const { homeTeamGoals, awayTeamGoals } = body;
+  const matches = await Matches.findOne({ where: { id } });
+  if (!matches) throw new HttpException(400, 'not found matches');
+
+  const updateGoals = await Matches.update({
+    homeTeamGoals,
+    awayTeamGoals,
+  }, { where: { id } });
+  return updateGoals;
+};
+
 export default {
   getMatches,
   matchesInProgress,
   saveMatches,
   updateMatches,
+  updateMacthesInProgress,
 };
