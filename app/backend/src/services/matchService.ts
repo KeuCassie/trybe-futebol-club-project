@@ -11,6 +11,19 @@ const getMatches = async (): Promise<object> => {
   return matches;
 };
 
+const matchesInProgress = async (query: any): Promise<any> => {
+  const matches = await Matches.findAll({
+    where: { inProgress: query },
+    include: [
+      { model: Teams, as: 'teamHome', attributes: ['teamName'] },
+      { model: Teams, as: 'teamAway', attributes: ['teamName'] },
+    ],
+  });
+  console.log('service', matches);
+  return matches;
+};
+
 export default {
   getMatches,
+  matchesInProgress,
 };
