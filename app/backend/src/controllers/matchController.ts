@@ -14,15 +14,13 @@ const getMatches = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(matches);
 };
 
-/* const matchesInProgress = async (req: Request, res: Response): Promise<Response> => {
-  const { inProgress } = req.query;
-  const number = (inProgress === 'true');
-  console.log('controller', number);
-  const matches = await matchService.matchesInProgress(+number);
-  return res.status(200).json(matches);
-}; */
+const saveMatches = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = res.locals.payload;
+  const matches = await matchService.saveMatches(id, req.body);
+  return res.status(201).json(matches);
+};
 
 export default {
   getMatches,
-  // matchesInProgress,
+  saveMatches,
 };

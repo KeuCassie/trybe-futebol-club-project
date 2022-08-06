@@ -6,7 +6,7 @@ const authenticationMiddleware = async (req: Request, res: Response, next: NextF
   const token = req.headers.authorization || '';
 
   const payload = await authToken.authenticateToken(token);
-  if (!payload) throw new HttpException(401, 'Token Invalid');
+  if (!payload) throw new HttpException(401, 'Token must be a valid token');
 
   res.locals.payload = payload;
 

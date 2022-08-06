@@ -21,7 +21,7 @@ const authenticateToken = async (token: string | undefined): Promise<string | Jw
     const validate = verify(token, TOKEN_SECRET);
     return validate;
   } catch (error) {
-    throw new HttpExceptions(401, 'jwt malformed');
+    throw new HttpExceptions(401, 'Token must be a valid token');
   }
 };
 
